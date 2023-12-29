@@ -9,7 +9,8 @@ var connectionString = builder.Configuration.GetConnectionString("JobAppContextC
 builder.Services.AddDbContext<JobAppContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<JobAppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<JobAppUser>(options => options.SignIn.RequireConfirmedAccount = false).AddDefaultTokenProviders()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<JobAppContext>();
 
 // Add services to the container.
